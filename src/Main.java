@@ -7,10 +7,11 @@ public class Main {
     static double weight = 3.0;
     static byte hunger = 0;
     static byte needgames = 0;
+
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
         boolean program = true;
-        String menu = null;
+        char menu = '0';
         System.out.println("Добро пожаловать в CatLive!");
         System.out.println("Давайте создадим вашего первого питомца");
 //        Создаем кота:
@@ -24,189 +25,124 @@ public class Main {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                 if (variants < 1) {
                     System.out.println("Мы создали нашего кота! Давайте посмотрим на его состояние");
-                    }
-                else if (variants >= 1){
                 }
                 System.out.println("Выберите и введите пункт меню, для обзора действий с котом:");
-                catimage();
                 System.out.println("1. Состояние кота");
                 System.out.println("2. Кормление кота");
                 System.out.println("3. Поиграть с котом");
-                System.out.println("\"exit\" - для выключения программы");
-                menu = scanner.nextLine();
+                System.out.println("\"S\" - для выключения программы");
+                menu = scanner.next().charAt(0);
                 switch (menu) {
-                    case "1":
+                    case '1':
                         System.out.println("Возраст кота: " + age);
                         System.out.println("Вес: " + weight + " кг");
                         System.out.println("Голод: " + hunger);
                         System.out.println("Игры: " + needgames);
-                        menu = null;
-                        System.out.println("Введите out, что бы выйти из меню");
-                        menu = scanner.nextLine();
-                        if (menu == "out") {
-                            break;
-                        }
+                        System.out.println("Введите любую клавишу, что бы выйти из меню");
+                        menu = scanner.next().charAt(0);
                         break;
-                    case "2":
+                    case '2':
                         cateating();
                         break;
-                    case "3":
+                    case '3':
                         catgames();
                         break;
-                    case "exit":
+                    case 'S':
                         variants = 501;
                         program = false;
                         break;
                     default:
-                        System.out.println("Неверная команда. Повторите ввод");
-                        break;
+                        System.out.println("Неверная команда, повторите ввод.");
                 }
-                if (variants >= 5){
+                if (variants >= 20) {
                     age += 1;
                 }
-
-             }
+                hunger -= 5;
+                if (hunger <= 0) {
+                    hunger = 0;
+                }
+                weight -= 0.1000000000000000;
+            }
         }
     }
 
     public static void cateating() throws IOException, InterruptedException {
-        String eatmenu;
+        char eatmenu;
         boolean eatHunger = true;
         Scanner scanner = new Scanner(System.in);
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        while (eatHunger){
-            cateat();
+        while (eatHunger) {
             byte cycles = 0;
             while (cycles < 1) {
                 cycles += 1;
-            if(hunger >= 50) {
-                System.out.println("Похоже кот не голоден");
-                System.out.println("введите \"out\" для выхода");
-            } else {
-                System.out.println("Выберите блюдо:");
-                System.out.println("1. Консервы с тунцом");
-                System.out.println("2. Кроличий паштет");
-                System.out.println("3. Колбаса со стола");
-                System.out.println("Если вы хотите оставить котика голодать нажмите \"0\", имейте ввиду, кот запомнит зло навсегда");
-                eatmenu = null;
-                eatmenu = scanner.nextLine();
-                switch (eatmenu) {
-                    case "1":
-                        System.out.println("Кот благодарен вам и, похоже он набрал лишние 20 грамм. Давайте поиграем с " + name);
-                        System.out.println("введите \"out\" для выхода или \"res\" для повторения");
-                        hunger += 60;
-                        weight += 0.20;
-                        break;
-                    case "2":
-                        System.out.println("Кот благодарен вам и, похоже он набрал лишние 40 грамм. Давайте поиграем с " + name);
-                        System.out.println("введите \"out\" для выхода или \"res\" для повторения");
-                        hunger += 80;
-                        weight += 0.40;
-                        break;
-                    case "3":
-                        System.out.println("Кот благодарен вам и, похоже он набрал лишние 60 грамм. Давайте поиграем с " + name);
-                        System.out.println("введите \"out\" для выхода или \"res\" для повторения");
-                        hunger += 95;
-                        weight += 0.60;
-                        break;
-                    default:
-                        System.out.println("Неверная команда, попробуйте занового. Введите \"out\" для выхода");
-                        break;
+                if (hunger >= 50) {
+                    System.out.println("Похоже кот не голоден");
+                    System.out.println("введите \"x\" для выхода");
+                } else {
+                    System.out.println("Выберите блюдо:");
+                    System.out.println("1. Консервы с тунцом");
+                    System.out.println("2. Кроличий паштет");
+                    System.out.println("3. Колбаса со стола");
+                    eatmenu = scanner.next().charAt(0);
+                    switch (eatmenu) {
+                        case '1':
+                            System.out.println("Кот благодарен вам и, похоже он набрал лишние 20 грамм. Давайте поиграем с " + name);
+                            System.out.println("введите \"x\" для выхода");
+                            hunger += 40;
+                            weight += 0.20;
+                            break;
+                        case '2':
+                            System.out.println("Кот благодарен вам и, похоже он набрал лишние 40 грамм. Давайте поиграем с " + name);
+                            System.out.println("введите \"x\" для выхода");
+                            hunger += 60;
+                            weight += 0.40;
+                            break;
+                        case '3':
+                            System.out.println("Кот благодарен вам и, похоже он набрал лишние 60 грамм. Давайте поиграем с " + name);
+                            System.out.println("введите \"x\" для выхода");
+                            hunger += 80;
+                            weight += 0.60;
+                            break;
+                        default:
+                            System.out.println("Неверная команда, попробуйте занового. Введите \"x\" для выхода");
+                            break;
+                    }
+                    if (hunger >= 100) {
+                        hunger = 100;
+                    }
                 }
+                eatmenu = scanner.next().charAt(0);
+                if (eatmenu == 'x') {
+                    eatHunger = false;
+                } else
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                System.out.println("Неверная команда, попробуйте еще раз");
             }
-            eatmenu = null;
-            eatmenu = scanner.nextLine();
-            if (eatmenu != "res" || eatmenu != "out"){
-                System.out.println("Повторите ввод");
-            }
-            else if (eatmenu == "res"){
-                break;}
-            else if (eatmenu == "out"){
-                break;
-                }
-            }
-            break;
         }
     }
+
     public static void catgames() throws IOException, InterruptedException {
-        String gamemenu;
+        char gamemenu;
         Scanner scanner = new Scanner(System.in);
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        if (hunger <= 20 || hunger >= 90) {
-            System.out.println("Я не могу играть потому что голоден или много съел");
-            System.out.println("Кот развернулся и ушел спать");
-        } else {
-            needgames += 50;
-            System.out.println("Поиграли " + needgames);
+        for (int game = 0; game < 100; game += 50) {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            if (needgames >= 100) {
+                System.out.println("Кажется кот наигрался и хочет поесть");
+            } else if (hunger <= 20 || hunger >= 90) {
+                System.out.println("Я не могу играть потому что голоден или много съел");
+                System.out.println("Кот развернулся и ушел спать");
+            } else {
+                needgames += 50;
+                System.out.println("Поиграли хорошо + " + needgames);
+                hunger -= 60;
+                weight -= 0.3000000000000000;
+            }
+            System.out.println("Введите \"x\" для выхода");
+            gamemenu = scanner.next().charAt(0);
+            switch (gamemenu) {
+                case 'x' -> game = 100;
+                default -> System.out.println("Неверно введена команда");
+            }
         }
-        gamemenu = null;
-        System.out.println("Введите \"out\" для выхода или \"game\" для продолжения игры");
-        gamemenu = scanner.nextLine();
-    }
-    public static void catimage() {
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣄⣤⣤⣴⣿⡄⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⣰⡾⠿⠿⠿⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-        System.out.println("⠀⠀⠀⠀⠀⠀⠈⠛⠷⢦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-    }
-    public static void cateat() {
-        System.out.println(" \n" +
-                         "⠀⠀⢀⣠⡤⢶⣟⣻⣿⣯⣭⡭⠉⠉⠉⠉⠉⠉⠉⠉⠙⠛⠛⠛⠶⢤⣄⠀⠀⠀\n" +
-                         "⠀⠀⢸⡍⠀⠛⠉⠉     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣩⡇⠀⠀\n" +
-                         "⠀⠀⢸⡏⠙⠳⠶⠶⣦⣤⣤⣀⣀⣀⣀⣀⣀⣀⣀⣤⣤⣴⡶⠶⠞⠋⢹⡇⠀⠀\n" +
-                         "⠀⠀⠀⣷⡀⠀⠀⠀⠀⠀⠀⠀     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠀⠀⠀\n" +
-                          "⠀⠀⠀⠈⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠁⠀⠀⠀\n" +
-                          "⠀⠀⠀⠀⠈⠹⢶⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⣀⣠⡴⠏⠁⠀⠀⠀⠀\n" +
-                           "⠀⠀⠀⠀⠀⠀⠀⠈⢹⣇⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣸⡏⠁⠀⠀⠀⠀⠀⠀⠀");
-    }
-    public static void catgame1() {
-        System.out.println("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣆⠀⠀⠀⢀⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⢀⣶⣾⣧⣀⠀⠀⠀⠀⠀⢀⣿⣿⣶⣶⣶⣾⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠸⠿⢿⣿⣦⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠙⢿⣿⣦⡀⢀⣤⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⣤⣾⣿⣿⡄\n" +
-                         "⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⢀⣠⣴⣾⡿⠟⠋⠉⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⡟⠃⠀⠛⢿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⠀⠀⣿⣿⠏⠀⠀⠀⠀⠀⢻⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠀⠀⢀⣼⣿⡟⠀⠀⠀⠀⠀⠀⠘⣿⣿⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                         "⠀⠀⠀⠰⠿⠿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀");
-    }
-    public static void catgame2() {
-        System.out.println("       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣆⠀⠀⠀⢀⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⢀⣶⣾⣧⣀⠀⠀⠀⠀⠀⢀⣿⣿⣶⣶⣶⣾⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠸⠿⢿⣿⣦⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠙⢿⣿⣦⡀⢀⣤⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⣤⣾⣿⣿⡄\n" +
-                                "⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⢀⣠⣴⣾⡿⠟⠋⠉⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢈⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⡟⠃⠀⠛⢿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⠀⠀⣿⣿⠏⠀⠀⠀⠀⠀⢻⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠀⠀⢀⣼⣿⡟⠀⠀⠀⠀⠀⠀⠘⣿⣿⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                                "⠀⠀⠀⠰⠿⠿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀");
     }
 }
