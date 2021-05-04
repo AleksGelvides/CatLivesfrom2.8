@@ -61,7 +61,7 @@ public class Main {
                 if (hunger <= 0) {
                     hunger = 0;
                 }
-                weight -= 0.1000000000000000;
+                weight -= 0.1;
             }
         }
     }
@@ -135,7 +135,7 @@ public class Main {
                 needgames += 50;
                 System.out.println("Поиграли хорошо + " + needgames);
                 hunger -= 60;
-                weight -= 0.3000000000000000;
+                weight -= 0.3;
             }
             System.out.println("Введите \"x\" для выхода");
             gamemenu = scanner.next().charAt(0);
